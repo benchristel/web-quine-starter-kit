@@ -8,14 +8,18 @@
 var WebQuine = {}
 
 ;(function() {
-  WebQuine.save = function() {
+  WebQuine.save = function(state) {
     var stateScript = document.getElementById('state')
-    stateScript.textContent = 'WebQuine.state = ' + JSON.stringify(WebQuine.state)
+    stateScript.textContent = 'WebQuine.__state__ = ' + JSON.stringify(state)
 
     var now = new Date()
     var pageData = document.documentElement.outerHTML
     var blob = new Blob([pageData], {type: 'text/html'})
     saveAs(blob, 'webquine-' + formatDateForFilename(now))
+  }
+
+  WebQuine.load = function() {
+    return WebQuine.__state__
   }
 
   function formatDateForFilename(date) {
@@ -72,7 +76,7 @@ var WebQuine = {}
 
     </script>
     <script type="text/javascript" id="state">
-WebQuine.state = {}
+WebQuine.__state__ = {}
     </script>
     <script type="text/javascript">
 #include .build/app.js

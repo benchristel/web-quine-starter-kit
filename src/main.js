@@ -1,26 +1,22 @@
-var saveButton = document.getElementById('save')
-var encryptButton = document.getElementById('encrypt')
-var decryptButton = document.getElementById('decrypt')
-var textarea = document.getElementById('text')
-var cipherLevelInput = document.getElementById('cipher-level')
+app({
+  root: document.getElementById('root'),
 
-textarea.value = WebQuine.state.text || ''
-if (!WebQuine.state.cipherLevel) WebQuine.state.cipherLevel = 1
-cipherLevelInput.value = WebQuine.state.cipherLevel
+  state: InitialState(),
 
-saveButton.addEventListener('click', function() {
-  WebQuine.state.text = textarea.value
-  WebQuine.save()
-})
+  actions: Actions,
 
-encryptButton.addEventListener('click', function() {
-  textarea.value = fancyRot(WebQuine.state.cipherLevel, textarea.value)
-})
+  view: (state, actions) => h("div", {}, [
+      CounterComponent(state, actions),
+      h('button', {onclick: actions.save}, 'Save')
+    ]),
 
-cipherLevelInput.addEventListener('change', function() {
-  WebQuine.state.cipherLevel = parseInt(cipherLevelInput.value)
-})
-
-decryptButton.addEventListener('click', function() {
-  textarea.value = fancyRot(105 - WebQuine.state.cipherLevel, textarea.value)
+  events: {
+    load: function() {
+      // This clears out the (possibly stale) view when
+      // loading the app from a save file, ensuring that the
+      // view the user sees is always computed from the
+      // latest state.
+      document.getElementById('root').innerHTML = ''
+    }
+  }
 })
