@@ -1,7 +1,17 @@
-#!/bin/bash -e
+#!/bin/bash
 
 lib_files() {
-  find src -name '*.js' | grep -v '^src/main.js$'
+  local DIR="$1"
+  # if the preamble directory exists, list the files
+  # within it first. This recurses so if preamble
+  # contains a preamble directory of its own, it's
+  # loaded before any other files, and so on.
+  [ -d "$DIR/preamble" ] && lib_files "$DIR/preamble"
+
+  # then list all other .js files, except main.js
+  find "$DIR" -name '*.js' \
+    | grep -v "^$DIR/preamble/" \
+    | grep -v "^$DIR/main.js$"
 }
 
 test_files() {
@@ -35,7 +45,7 @@ fi
 silent which jasmine || npm i -g jasmine
 
 mkdir -p .build
-lib_files | xargs cat > .build/app.js
+lib_files src | xargs cat > .build/app.js
 test_files | xargs cat .build/app.js > .build/test.js
 
 jasmine .build/test.js

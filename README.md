@@ -43,9 +43,12 @@ Conceptually, everything in `src/` gets concatenated into
 one big JavaScript file, which is then copy-pasted into the
 HTML. Be aware that the order in which files are
 concatenated is not guaranteed, with the exception that the
-`main.js` file always goes at the end. That means that
-files other than `main.js` shouldn't depend on any other
-files having been loaded first.
+`main.js` file always goes at the end, and any files in
+the `src/preamble/` directory go first. That means that
+files other than `main.js` generally should not depend on
+any other files having been loaded first, though if you
+can't avoid an ordering dependency between files the file
+that must run first should go in `src/preamble/`.
 
 To make that a bit more concrete, here's an example of
 what *won't* work:
@@ -85,5 +88,4 @@ var message = "hello"
 
 // this alerts "hello" as expected
 foo()
-
 ```
