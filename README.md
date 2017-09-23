@@ -39,14 +39,20 @@ In order to write your app code effectively, you'll need to
 know a bit about how it gets compiled into the `index.html`
 file.
 
-Conceptually, everything in `src/` gets concatenated into
-one big JavaScript file, which is then copy-pasted into the
-HTML. Be aware that the order in which files are
-concatenated is not guaranteed, with the exception that the
-`main.js` file always goes at the end, and any files in
-the `src/preamble/` directory go first. That means that
-files other than `main.js` generally should not depend on
-any other files having been loaded first, though if you
+The `src/` and `test/` directories are hardcoded into the
+framework's assumptions about how files are organized, so
+don't rename them (or be ready to change `build.sh` if you
+do). You're free to organize files within those directories
+any way you like, though.
+
+When you run `./build.sh`, everything in `src/` gets
+concatenated into one big JavaScript file, which is then
+copy-pasted into the HTML. Be aware that the order in which
+files are concatenated is not guaranteed, with the exception
+that the `main.js` file always goes at the end, and any
+files in the `src/preamble/` directory go first. That means
+that files other than `main.js` generally should not depend
+on any other files having been loaded first, though if you
 can't avoid an ordering dependency between files the file
 that must run first should go in `src/preamble/`.
 
