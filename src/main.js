@@ -6,7 +6,7 @@ app({
   actions: Actions,
 
   view: (state, actions) => h("div", {}, [
-      CounterComponent(state, actions),
+      CounterView(state, actions),
       h('button', {onclick: actions.save}, 'Save')
     ]),
 

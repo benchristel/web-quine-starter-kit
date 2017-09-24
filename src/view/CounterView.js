@@ -1,4 +1,4 @@
-const CounterComponent = (state, actions) =>
+const CounterView = (state, actions) =>
   h("div", {}, [
     h('h1', {}, text(state)),
     h('button', {onclick: actions.increment}, '+1'),
