@@ -1,4 +1,4 @@
 Actions.save = state => (
-  Actions._quineSave(state.toJS()),
+  WebQuine.save(state.toJS()),
   state
 )

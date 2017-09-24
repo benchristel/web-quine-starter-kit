@@ -51,7 +51,8 @@ fi
 silent which jasmine || npm i -g jasmine
 
 mkdir -p .build
-lib_files src | xargs cat > .build/app.js
+lib_files .web-quine-stuff | xargs cat > .build/app.js
+lib_files src | xargs cat >> .build/app.js
 test_files | xargs cat .build/app.js > .build/test.js
 
 jasmine .build/test.js
