@@ -1,17 +1,23 @@
 #!/bin/bash
 
+read_preserving_whitespace() {
+  IFS= read -r $1
+}
+
 lib_files() {
   local DIR="$1"
-  # if the preamble directory exists, list the files
-  # within it first. This recurses so if preamble
-  # contains a preamble directory of its own, it's
-  # loaded before any other files, and so on.
-  [ -d "$DIR/preamble" ] && lib_files "$DIR/preamble"
 
-  # then list all other .js files, except main.js
-  find "$DIR" -name '*.js' \
-    | grep -v "^$DIR/preamble/" \
-    | grep -v "^$DIR/main.js$"
+  # recurse depth-first into all subdirectories
+  find "$DIR" -type directory -depth 1 \
+  | (while read_preserving_whitespace subdir; do
+    lib_files "$subdir"
+  done)
+
+  # then list all other .js files, except main.js, in
+  # alphabetical order
+  find "$DIR" -name '*.js' -type file -depth 1 \
+    | grep -v "^$DIR/main.js$" \
+    | sort
 }
 
 test_files() {
