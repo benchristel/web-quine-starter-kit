@@ -1,6 +1,6 @@
 function InitialState() {
   return WebQuine.load() || {
-    noun: 'wug',
+    noun: 'llama',
     count: 0
   }
 }
