@@ -12,6 +12,9 @@ increase build times.
 
 ## Getting Started
 
+You'll need the latest version of Node. If you use Homebrew,
+you can get it with `brew upgrade node` or `brew install node`.
+
 Copy the command below to clone this repo and tidy it up
 for your new project.
 
