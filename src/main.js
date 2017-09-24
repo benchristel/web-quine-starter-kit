@@ -1,7 +1,7 @@
 app({
   root: document.getElementById('root'),
 
-  state: InitialState(),
+  state: Immutable.Map(InitialState()),
 
   actions: Actions,
 
