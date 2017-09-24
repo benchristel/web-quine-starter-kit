@@ -56,4 +56,4 @@ test_files | xargs cat .build/app.js > .build/test.js
 
 jasmine .build/test.js
 
-<main.html expand_includes > index.html
+<.web-quine-stuff/template.html expand_includes > index.html
