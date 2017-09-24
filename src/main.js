@@ -1,4 +1,4 @@
-app({
+createApp({
   root: document.getElementById('root'),
 
   state: Immutable.Map(InitialState()),
