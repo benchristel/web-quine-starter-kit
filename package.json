@@ -1,0 +1,32 @@
+{
+  "name": "web-quine-starter-kit",
+  "version": "0.0.0",
+  "description": "Replace this description with your own!",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benchristel/web-quine-starter-kit.git"
+  },
+  "keywords": [
+    "web",
+    "quine",
+    "starter",
+    "kit"
+  ],
+  "author": "Ben Christel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benchristel/web-quine-starter-kit/issues"
+  },
+  "homepage": "https://github.com/benchristel/web-quine-starter-kit#readme",
+  "dependencies": {
+    "hyperapp": "^0.12.1",
+    "immutable": "^3.8.1"
+  }
+}
