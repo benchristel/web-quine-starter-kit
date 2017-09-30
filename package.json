@@ -26,7 +26,11 @@
   },
   "homepage": "https://github.com/benchristel/web-quine-starter-kit#readme",
   "dependencies": {
+    "browserify": "^14.4.0",
     "hyperapp": "^0.12.1",
-    "immutable": "^3.8.1"
+    "immutable": "^3.8.1",
+    "jasmine": "^2.8.0",
+    "uglify-js": "^3.1.2",
+    "yarn": "^1.1.0"
   }
 }

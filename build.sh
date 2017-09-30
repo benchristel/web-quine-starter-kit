@@ -55,7 +55,10 @@ expand_includes() {
 }
 
 ensure_installed() {
-  silent which $1 || npm install --global $1
+  # if already installed, do nothing
+  [ -e node_modules/$1 ] && return 0
+
+  yarn add $1
 }
 
 md5_of_file() {
@@ -87,6 +90,7 @@ uglify() {
   uglifyjs --compress --mangle -o "$output" -- "$input"
 }
 
+YARNBIN=node_modules/.bin
 dry_run=no
 
 while getopts "n" opt; do
@@ -102,21 +106,25 @@ if [ "$dry_run" = "yes" ]; then
   exit 0
 fi
 
-if ! silent which npm; then
-  >&2 echo "ERROR: *** NPM not found. Please install it and try again."
+if ! silent which npm && ! silent which yarn; then
+  >&2 echo "ERROR: *** Neither npm nor yarn found. Please install npm and try again."
   exit 1
 fi
+
+# If yarn is not installed, get it now
+silent which yarn || npm install --global yarn
 
 ensure_installed jasmine
 
 mkdir -p .build
 
 if need_to_rebuild_thirdparty_js; then
-  npm install
+  yarn # installs all dependencies
   ensure_installed browserify
-  ensure_installed uglifyjs
-  browserify manifest.js -o .build/thirdparty.js
-  uglify .build/thirdparty.js .build/thirdparty.min.js
+  ensure_installed uglify-js
+  $YARNBIN/browserify manifest.js -o .build/thirdparty.js
+  >&2 echo "Minifying packages. This could take a while. Future builds will be much faster."
+  $YARNBIN/uglifyjs .build/thirdparty.js -cmo .build/thirdparty.min.js
   md5_of_file manifest.js > .build/manifest.js.md5
   md5_of_file package.json > .build/package.json.md5
 fi
@@ -126,6 +134,6 @@ cat .build/thirdparty.min.js >> .build/app.js
 lib_files src | xargs cat >> .build/app.js
 test_files | xargs cat .build/app.js > .build/test.js
 
-jasmine .build/test.js
+$YARNBIN/jasmine .build/test.js
 
 <.web-quine-stuff/template.html expand_includes > index.html

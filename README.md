@@ -137,3 +137,23 @@ do this by ensuring that your files contain only definitions
 of functions and variables at the top level. It's only when
 you start calling functions or accessing other variables in
 top-level code that you run into ordering problems.
+
+## Adding new NPM packages
+
+The starter kit uses [Yarn](https://yarnpkg.com/en/) as the
+package manager. This is a really good thing. Yarn is fast,
+reliable, and you don't have to faff around with shrinkwrap
+files—your dependencies are locked at the version you
+actually installed (unless you explicitly upgrade, of
+course), and the same versions will be installed everywhere,
+eliminating "works on my machine" issues.
+
+There's a tiny learning curve as you transition from NPM, as
+yarn's commands are structured a bit differently:
+
+NPM | Yarn equivalent
+--- | ---------------
+`npm install` | `yarn`
+`npm install --save $pkg` | `yarn add $pkg`
+`npm uninstall --save $pkg` | `yarn remove $pkg`
+`npm install --global $pkg` | `yarn global add $pkg`
