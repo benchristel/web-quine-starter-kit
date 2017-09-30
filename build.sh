@@ -116,9 +116,7 @@ if need_to_rebuild_thirdparty_js; then
   ensure_installed browserify
   ensure_installed uglifyjs
   browserify manifest.js -o .build/thirdparty.js
-  # TODO: uglify
   uglify .build/thirdparty.js .build/thirdparty.min.js
-  # cp .build/thirdparty.js .build/thirdparty.min.js
   md5_of_file manifest.js > .build/manifest.js.md5
   md5_of_file package.json > .build/package.json.md5
 fi
