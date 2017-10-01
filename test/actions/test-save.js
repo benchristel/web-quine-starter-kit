@@ -4,7 +4,7 @@ describe('the save action', function() {
   })
 
   it('does not modify the state', function() {
-    const initial = Immutable.Map({foo: 1})
+    const initial = {foo: 1}
 
     const final = Actions.save(initial, Actions)
 
@@ -12,7 +12,7 @@ describe('the save action', function() {
   })
 
   it('saves the state via WebQuine.save', function() {
-    const initial = Immutable.Map({foo: 1})
+    const initial = {foo: 1}
 
     const final = Actions.save(initial, Actions)
 

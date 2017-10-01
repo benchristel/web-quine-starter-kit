@@ -1,2 +1,3 @@
-Actions.changeNoun = (state, actions, event) =>
-  state.set('noun', event.target.value)
+Actions.changeNoun = atPath('/noun',
+  (_, __, event) => event.target.value
+)

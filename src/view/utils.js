@@ -17,12 +17,12 @@ function humanizeCount(n) {
 }
 
 function getNoun(state) {
-  var raw = state.get('noun')
+  var raw = state.noun
   return raw === '' ? 'nothing' : raw
 }
 
 function text(state) {
-  let count = state.get('count')
+  let count = state.count
   let noun  = getNoun(state)
 
   return 'There '

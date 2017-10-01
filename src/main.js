@@ -1,7 +1,7 @@
 createApp({
   root: document.getElementById('root'),
 
-  state: Immutable.Map(InitialState()),
+  state: InitialState(),
 
   actions: Actions,
 

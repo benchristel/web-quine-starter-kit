@@ -1,6 +1,6 @@
 describe('CounterView', function() {
   it('renders a sentence describing the current count and some controls to change it', function() {
-    const state = Immutable.Map({noun: 'foo', count: 0})
+    const state = {noun: 'foo', count: 0}
 
     expect(CounterView(state, Actions)).toEqual(
       h("div", {}, [
