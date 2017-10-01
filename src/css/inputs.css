@@ -1,0 +1,9 @@
+input, button {
+  font-size: 1em;
+  padding: 6px;
+  margin: 6px;
+}
+
+button {
+  cursor: pointer;
+}

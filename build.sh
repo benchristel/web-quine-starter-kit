@@ -133,6 +133,7 @@ lib_files .web-quine-stuff | xargs cat > .build/app.js
 cat .build/thirdparty.min.js >> .build/app.js
 lib_files src | xargs cat >> .build/app.js
 test_files | xargs cat .build/app.js > .build/test.js
+find src -name '*.css' | xargs cat > .build/app.css
 
 $YARNBIN/jasmine .build/test.js
 
